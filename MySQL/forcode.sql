@@ -112,6 +112,95 @@ INSERT INTO produtos VALUES
   (4, 'adesivos', 'grafica', 1, 40, 5);
 UNLOCK TABLES;
 
+-- Exemplos utilizados durante o minicurso !!!!!
+
+-- Mostrar os bancos importados aqui no Workbench
+SHOW DATABASES;
+
+-- Estrutura básica da criação de um banco de dados
+CREATE DATABASE <nome>;
+
+  -- Exemplo: criando um banco de teste
+CREATE DATABASE teste1;
+
+  -- Exemplo: deletando esse banco teste
+DROP DATABASE teste1;
+
+-- Adicionando uma tabela dentro de um banco
+CREATE TABLE <nome> (<coluna><tipo de dados>)
+  -- Exemplo: adicionando uma tabela alunos no banco
+USE teste1;
+CREATE TABLE alunos(
+ id INTEGER NOT NULL,
+ nome TEXT NOT NULL,
+ idade INTEGER NOT NULL
+); 
+
+-- Inserindo dados em uma tabela
+INSERT INTO <tabela> VALUES (dado1, dado2…);
+  -- exemplo: inserindo um dado na tabela alunos
+INSERT INTO alunos VALUES (1, "joao", 20);
+
+-- Comando SELECT
+SELECT * FROM <nome da tabela>
+  -- select e o comando de selecao 
+  -- * seleciona todos os dados
+  -- from significa de onde. de onde vc esta selecionando
+
+  -- Exemplo de uso de SELECT
+    -- Cláusula SELECT AS 
+SELECT id_membro_constante AS id_membro FROM produtos 
+    -- Cláusula SELECT LIMIT
+SELECT * FROM projetos LIMIT 5;
+  
+  
+-- Funções de agregação (sintaxe)
+SELECT [função(ões) de agregação/coluna(s) FROM [tabela(s)]
+  -- Exemplo: utilizando MAX
+SELECT MAX(preco) FROM produtos;
+  -- Exemplo: utilizando SUM
+SELECT SUM(preco) FROM produtos
+  -- Exemplo: utilizando COUNT
+SELECT COUNT(*) FROM membros;
+  -- Exemplo: utilizando DISTINCT
+SELECT DISTINCT diretoria FROM membros;
+  -- Exemplo: utilizando COUNT DISTINCT
+SELECT COUNT(DISTINCT diretoria) FROM membros;
+
+-- WHERE
+  -- Exemplo:
+SELECT * FROM produtos WHERE preco > 10;
+
+-- Operadores
+  -- Exemplo: operador maior
+  SELECT * FROM produtos WHERE preco > 10;
+  -- Exemplo: like
+  SELECT * FROM membros WHERE membro LIKE "%ana%";
+  -- Exemplo: AND
+  SELECT * FROM membros WHERE idade > 20 AND genero = "M";
+  -- Exemplo: OR
+  SELECT * FROM membros WHERE idade > 20 OR genero = "M";
+  
+-- Alteração de tabela 
+  -- Adição de colunas
+  ALTER TABLE <tabela> ADD COLUMN <nome><tipo>
+    -- Exemplo: adição de colunas
+    ALTER TABLE produtos ADD COLUMN quant_vendidas INTEGER NOT NULL;
+  -- Remoção de colunas
+  ALTER TABLE <tabela>  DROP COLUMN <nome>
+  -- Modificação
+  ALTER TABLE <tabela> MODIFY COLUMN <coluna><tipo>
+
+-- Cláusula UPDATE
+UPDATE nome_da_tabela SET coluna = valor WHERE condição;
+ -- Exemplo: 
+ UPDATE produtos SET preco = 10 WHERE nome = "copos";
+ 
+ -- Cláusula DELETE
+ DELETE FROM nome_da_tabela WHERE condição;
+   -- Exemplo:
+   DELETE FROM  membros WHERE membro = "Lucas"
+
 -- EXEMPLO UTILIZANDO GROUP BY
 SELECT diretoria, COUNT(*)
  FROM membros
